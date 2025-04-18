@@ -6,13 +6,15 @@ import { useEffect } from "react";
 export default function Home() {
   const router = useRouter();
 
-  useEffect(()=>{
+  useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (isLoggedIn === "true") {
       router.push("/dashboard");
       return;
+    } else {
+      router.push("/auth/login");
     }
-  }, [])
+  }, []);
 
-  return router.push("/dashboard");
+  return <div></div>;
 }
