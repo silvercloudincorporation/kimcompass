@@ -91,7 +91,7 @@ const initialEthnicGroups = [
 ]
 
 // Mock data for regions (for dropdown)
-export const regions = [
+const regions = [
   { id: "1", name: "Greater Accra" },
   { id: "2", name: "Ashanti" },
   { id: "3", name: "Western" },

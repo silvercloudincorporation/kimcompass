@@ -86,7 +86,7 @@ const initialClans = [
 ]
 
 // Mock data for tribes (for dropdown)
-export const tribes = [
+const tribes = [
   { id: "1", name: "Ashanti" },
   { id: "2", name: "Ewe" },
   { id: "3", name: "Ga" },

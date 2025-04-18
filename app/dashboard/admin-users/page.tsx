@@ -32,6 +32,10 @@ import { EditAdminModal } from "@/components/admin/edit-admin-modal"
 import { SuspendAdminDialog } from "@/components/admin/suspend-admin-dialog"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
+interface Roles {id: string, name: string}
+interface permission {id: string, label: string}
+interface PermissionGroup {name: string, permissions: permission[]}
+
 // Mock data for admin users
 const initialAdmins = [
   {
@@ -132,7 +136,7 @@ const initialAdmins = [
 ]
 
 // Available roles for dropdown
-export const roles = [
+const roles: Roles[] = [
   { id: "1", name: "Super Admin" },
   { id: "2", name: "Admin" },
   { id: "3", name: "Editor" },
@@ -140,7 +144,7 @@ export const roles = [
 ]
 
 // Available permissions for checkbox matrix
-export const permissionGroups = [
+const permissionGroups: PermissionGroup[] = [
   {
     name: "Access",
     permissions: [

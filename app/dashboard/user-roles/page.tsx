@@ -144,7 +144,7 @@ const initialRoles = [
 ]
 
 // Available permissions for checkbox matrix
-export const permissionGroups = [
+const permissionGroups = [
   {
     name: "Access",
     permissions: [

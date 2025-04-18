@@ -86,7 +86,7 @@ const initialSubClans = [
 ]
 
 // Mock data for parent clans (for dropdown)
-export const parentClans = [
+const parentClans = [
   { id: "1", name: "Ashanti Clan", tribe: "Ashanti" },
   { id: "2", name: "Ewe Clan", tribe: "Ewe" },
   { id: "3", name: "Ga-Adangbe Clan", tribe: "Ga" },
