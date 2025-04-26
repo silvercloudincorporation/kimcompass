@@ -1,0 +1,196 @@
+export interface VerificationItem {
+    id: string
+    name: string
+    dataType: string
+    details: Record<string, any>
+    submittedBy: string
+    dateSubmitted: string
+    status: "pending" | "approved" | "rejected"
+    rejectReason?: string
+  }
+  
+  export const mockVerificationItems: VerificationItem[] = [
+    {
+      id: "ver-001",
+      name: "John Doe",
+      dataType: "person",
+      details: {
+        age: 32,
+        gender: "Male",
+        clan: "Kilifi",
+        region: "East Africa",
+        email: "john.doe@example.com",
+        phone: "+254712345678",
+      },
+      submittedBy: "Mary Smith",
+      dateSubmitted: "2023-04-15T12:00:00Z",
+      status: "pending",
+    },
+    {
+      id: "ver-002",
+      name: "Kamau Family",
+      dataType: "family",
+      details: {
+        headOfFamily: "James Kamau",
+        members: 5,
+        region: "Central Kenya",
+        community: "Nairobi",
+      },
+      submittedBy: "James Kamau",
+      dateSubmitted: "2023-04-12T09:30:00Z",
+      status: "approved",
+    },
+    {
+      id: "ver-003",
+      name: "Mijikenda",
+      dataType: "ethnic-group",
+      details: {
+        location: "Coastal Kenya",
+        population: "Approximately 2.5 million",
+        language: "Mijikenda languages",
+        description: "Collection of nine closely related Bantu ethnic groups",
+      },
+      submittedBy: "Cultural Center Admin",
+      dateSubmitted: "2023-04-10T14:45:00Z",
+      status: "pending",
+    },
+    {
+      id: "ver-004",
+      name: "Kikuyu",
+      dataType: "main-clan",
+      details: {
+        location: "Central Kenya",
+        population: "Approximately 8 million",
+        subClans: 9,
+        description: "Largest ethnic group in Kenya",
+      },
+      submittedBy: "Historical Society",
+      dateSubmitted: "2023-04-08T11:20:00Z",
+      status: "pending",
+    },
+    {
+      id: "ver-005",
+      name: "Agikuyu Heritage Festival",
+      dataType: "event",
+      details: {
+        date: "2023-06-01",
+        location: "Nyeri County",
+        organizer: "Cultural Heritage Association",
+        expectedAttendees: 500,
+        description: "Annual festival celebrating Agikuyu culture and traditions",
+        ticketPrice: "Ksh 1000",
+      },
+      submittedBy: "Event Coordinator",
+      dateSubmitted: "2023-04-05T13:15:00Z",
+      status: "rejected",
+      rejectReason: "Incomplete venue information and missing safety protocols",
+    },
+    {
+      id: "ver-006",
+      name: "Mbari ya Mukami",
+      dataType: "sub-clan",
+      details: {
+        mainClan: "Kikuyu",
+        region: "Central Kenya",
+        elders: 12,
+        description: "Prominent sub-clan of the Kikuyu people",
+      },
+      submittedBy: "Clan Elder",
+      dateSubmitted: "2023-04-02T10:10:00Z",
+      status: "pending",
+    },
+    {
+      id: "ver-007",
+      name: "Kibera Community Center",
+      dataType: "community",
+      details: {
+        location: "Nairobi County",
+        population: "Approximately 250,000",
+        established: "1970",
+        leaders: ["John Mwangi", "Sarah Otieno"],
+        description: "Vibrant multicultural community in Nairobi",
+      },
+      submittedBy: "Community Leader",
+      dateSubmitted: "2023-03-30T09:00:00Z",
+      status: "approved",
+    },
+    {
+      id: "ver-008",
+      name: "The Journey of Wangari Family",
+      dataType: "family-history",
+      details: {
+        period: "1920-2023",
+        mainLocations: ["Central Kenya", "Nairobi", "London"],
+        keyEvents: ["Migration during colonial era", "Independence participation", "International diaspora formation"],
+        contributors: ["Sarah Wangari", "James Wangari"],
+        mediaCount: 23,
+        description: "Chronicle of the Wangari family's journey through Kenya's history",
+      },
+      submittedBy: "Sarah Wangari",
+      dateSubmitted: "2023-03-28T15:30:00Z",
+      status: "pending",
+    },
+    {
+      id: "ver-009",
+      name: "Jane Akinyi",
+      dataType: "person",
+      details: {
+        age: 45,
+        gender: "Female",
+        clan: "Luo",
+        region: "Western Kenya",
+        email: "jane.akinyi@example.com",
+        phone: "+254723456789",
+      },
+      submittedBy: "Jane Akinyi",
+      dateSubmitted: "2023-03-25T14:00:00Z",
+      status: "approved",
+    },
+    {
+      id: "ver-010",
+      name: "Maasai Cultural Symposium",
+      dataType: "event",
+      details: {
+        date: "2023-07-15",
+        location: "Narok County",
+        organizer: "Maasai Cultural Foundation",
+        expectedAttendees: 300,
+        description: "Educational symposium on Maasai traditions and contemporary challenges",
+        ticketPrice: "Ksh 1500",
+      },
+      submittedBy: "Cultural Program Director",
+      dateSubmitted: "2023-03-20T11:45:00Z",
+      status: "rejected",
+      rejectReason: "Date conflicts with another major cultural event",
+    },
+    {
+      id: "ver-011",
+      name: "Kitale Settlement",
+      dataType: "community",
+      details: {
+        location: "Trans Nzoia County",
+        population: "Approximately 106,000",
+        established: "1908",
+        leaders: ["Robert Wafula", "Mary Karanja"],
+        description: "Agricultural community in Kenya's western region",
+      },
+      submittedBy: "Regional Historian",
+      dateSubmitted: "2023-03-18T09:30:00Z",
+      status: "pending",
+    },
+    {
+      id: "ver-012",
+      name: "Kalenjin",
+      dataType: "ethnic-group",
+      details: {
+        location: "Rift Valley",
+        population: "Approximately 6.3 million",
+        language: "Kalenjin languages",
+        description: "Group of Nilotic ethnic groups indigenous to Kenya",
+      },
+      submittedBy: "Cultural Researcher",
+      dateSubmitted: "2023-03-15T13:20:00Z",
+      status: "approved",
+    },
+  ]
+  

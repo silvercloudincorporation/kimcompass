@@ -40,6 +40,8 @@ import {
   ChevronDown,
   LogOut,
   GitBranch,
+  Home,
+  Building2,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
@@ -170,6 +172,12 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                           <span>Regions</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
+                      <SidebarMenuItem>
+                        <SidebarMenuButton tooltip="Regions" isActive={isActive("/dashboard/communities")} onClick={() => navigateTo("/dashboard/communities")}>
+                          <Building2 className="h-4 w-4" />
+                          <span>Communities</span>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
                     </SidebarMenu>
                   </SidebarGroupContent>
                 </CollapsibleContent>
@@ -245,25 +253,35 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   <SidebarGroupContent>
                     <SidebarMenu>
                       <SidebarMenuItem>
-                        <SidebarMenuButton tooltip="Accounts" isActive={isActive("/dashboard/accounts")} onClick={() => navigateTo("/dashboard/accounts")}>
+                        <SidebarMenuButton
+                          tooltip="Families"
+                          isActive={isActive("/dashboard/people/families")}
+                          onClick={() => navigateTo("/dashboard/people/families")}
+                        >
+                          <Home className="h-4 w-4" />
+                          <span>Families</span>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                      <SidebarMenuItem>
+                        <SidebarMenuButton tooltip="Accounts" isActive={isActive("/dashboard/people/accounts")} onClick={() => navigateTo("/dashboard/people/accounts")}>
                           <Users className="h-4 w-4" />
                           <span>Accounts</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                       <SidebarMenuItem>
-                        <SidebarMenuButton tooltip="Births" isActive={isActive("/dashboard/births")} onClick={() => navigateTo("/dashboard/births")}>
+                        <SidebarMenuButton tooltip="Births" isActive={isActive("/dashboard/people/births")} onClick={() => navigateTo("/dashboard/people/births")}>
                           <Baby className="h-4 w-4" />
                           <span>Births</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                       <SidebarMenuItem>
-                        <SidebarMenuButton tooltip="Deaths" isActive={isActive("/dashboard/deaths")} onClick={() => navigateTo("/dashboard/deaths")}>
+                        <SidebarMenuButton tooltip="Deaths" isActive={isActive("/dashboard/people/deaths")} onClick={() => navigateTo("/dashboard/people/deaths")}>
                           <Skull className="h-4 w-4" />
                           <span>Deaths</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                       <SidebarMenuItem>
-                        <SidebarMenuButton tooltip="Linkages" isActive={isActive("/dashboard/linkages")} onClick={() => navigateTo("/dashboard/linkages")}>
+                        <SidebarMenuButton tooltip="Linkages" isActive={isActive("/dashboard/people/linkages")} onClick={() => navigateTo("/dashboard/people/linkages")}>
                           <Link className="h-4 w-4" />
                           <span>Linkages</span>
                         </SidebarMenuButton>
@@ -297,19 +315,19 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                       <SidebarMenuItem>
-                        <SidebarMenuButton tooltip="Create Event" isActive={isActive("/dashboard/create-event")} onClick={() => navigateTo("/dashboard/create-event")}>
+                        <SidebarMenuButton tooltip="Create Event" isActive={isActive("/dashboard/events/create")} onClick={() => navigateTo("/dashboard/events/create")}>
                           <PlusCircle className="h-4 w-4" />
                           <span>Create Event</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                       <SidebarMenuItem>
-                        <SidebarMenuButton tooltip="Approvals" isActive={isActive("/dashboard/approvals")} onClick={() => navigateTo("/dashboard/approvals")}>
+                        <SidebarMenuButton tooltip="Approvals" isActive={isActive("/dashboard/events/approvals")} onClick={() => navigateTo("/dashboard/events/approvals")}>
                           <CheckCircle className="h-4 w-4" />
                           <span>Approvals</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                       <SidebarMenuItem>
-                        <SidebarMenuButton tooltip="Payments" isActive={isActive("/dashboard/payments")} onClick={() => navigateTo("/dashboard/payments")}>
+                        <SidebarMenuButton tooltip="Payments" isActive={isActive("/dashboard/events/payments")} onClick={() => navigateTo("/dashboard/events/payments")}>
                           <CreditCard className="h-4 w-4" />
                           <span>Payments</span>
                         </SidebarMenuButton>
@@ -337,7 +355,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   <SidebarGroupContent>
                     <SidebarMenu>
                       <SidebarMenuItem>
-                        <SidebarMenuButton tooltip="Histories" isActive={isActive("/dashboard/histories")} onClick={() => navigateTo("/dashboard/histories")}>
+                        <SidebarMenuButton tooltip="Histories" isActive={isActive("/dashboard/family-histories")} onClick={() => navigateTo("/dashboard/family-histories")}>
                           <BookOpen className="h-4 w-4" />
                           <span>Family Stories</span>
                         </SidebarMenuButton>

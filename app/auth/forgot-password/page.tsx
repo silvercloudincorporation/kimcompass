@@ -2,133 +2,122 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, Mail } from "lucide-react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import { ArrowLeft, Loader2, CheckCircle2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { useToast } from "@/components/ui/use-toast"
+import { AuthCard } from "@/components/auth/auth-card"
+import { CulturalQuote } from "@/components/auth/cultural-quote"
 
-// Form validation schema
-const forgotPasswordSchema = z.object({
+const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
 })
 
-type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>
-
 export default function ForgotPasswordPage() {
-  const { toast } = useToast()
   const [isLoading, setIsLoading] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  // Initialize form with react-hook-form
-  const form = useForm<ForgotPasswordFormValues>({
-    resolver: zodResolver(forgotPasswordSchema),
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
     },
   })
 
-  // Handle form submission
-  const onSubmit = async (data: ForgotPasswordFormValues) => {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
 
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-
-      console.log("Forgot password request:", data)
-
-      setIsSubmitted(true)
-
-      toast({
-        title: "Reset link sent",
-        description: "If your email is registered, you will receive a password reset link shortly.",
-      })
-    } catch (error) {
-      toast({
-        title: "Request failed",
-        description: "There was a problem sending the reset link. Please try again.",
-        variant: "destructive",
-      })
-    } finally {
+    // Simulate API call
+    setTimeout(() => {
       setIsLoading(false)
-    }
+      setIsSubmitted(true)
+    }, 1500)
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-[#0A1931]">KimCompass</h1>
-          <p className="mt-2 text-sm text-gray-600">Admin Dashboard</p>
+    <>
+      <div className="absolute top-6 left-6 z-20">
+        <div className="flex items-center gap-2">
+          <div className="h-8 w-8 rounded-full bg-[#0A1931] flex items-center justify-center">
+            <span className="text-white font-bold">K</span>
+          </div>
+          <span className="text-white font-semibold text-xl">KimCompass</span>
         </div>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Forgot Password</CardTitle>
-            <CardDescription>
-              {isSubmitted ? "Check your email for a reset link" : "Enter your email to receive a password reset link"}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            {isSubmitted ? (
-              <div className="space-y-4 text-center">
-                <div className="rounded-full bg-green-100 p-3 mx-auto w-fit">
-                  <Mail className="h-6 w-6 text-green-600" />
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  We've sent a password reset link to your email address. Please check your inbox and follow the
-                  instructions to reset your password.
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  If you don't receive an email within a few minutes, check your spam folder or try again.
-                </p>
-              </div>
-            ) : (
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <div className="relative">
-                            <Mail className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-                            <Input
-                              placeholder="your.email@example.com"
-                              className="pl-10"
-                              {...field}
-                              disabled={isLoading}
-                            />
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <Button type="submit" className="w-full bg-[#0A1931] hover:bg-[#0A1931]/90" disabled={isLoading}>
-                    {isLoading ? "Sending..." : "Send Reset Link"}
-                  </Button>
-                </form>
-              </Form>
-            )}
-          </CardContent>
-          <CardFooter className="flex justify-center border-t p-6">
-            <Link href="/auth/login" className="flex items-center text-sm font-medium text-[#0A1931] hover:underline">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to login
-            </Link>
-          </CardFooter>
-        </Card>
       </div>
-    </div>
+
+      <div className="flex flex-col items-center justify-center min-h-screen p-4">
+        <CulturalQuote />
+
+        {!isSubmitted ? (
+          <AuthCard
+            title="Forgot Password"
+            description="Enter your email address and we'll send you a link to reset your password"
+          >
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input placeholder="admin@kimcompass.com" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button type="submit" className="w-full bg-[#0A1931] hover:bg-[#0A1931]/90" disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Send Reset Link"
+                  )}
+                </Button>
+
+                <div className="text-center">
+                  <Link
+                    href="/auth/login"
+                    className="text-sm font-medium text-[#0A1931] hover:underline inline-flex items-center"
+                  >
+                    <ArrowLeft className="mr-1 h-3 w-3" />
+                    Back to login
+                  </Link>
+                </div>
+              </form>
+            </Form>
+          </AuthCard>
+        ) : (
+          <AuthCard title="Check Your Email">
+            <div className="text-center space-y-4">
+              <div className="flex justify-center">
+                <CheckCircle2 className="h-12 w-12 text-green-500" />
+              </div>
+              <p>
+                We've sent a password reset link to <span className="font-medium">{form.getValues().email}</span>
+              </p>
+              <p className="text-sm text-muted-foreground">
+                If you don't see the email, check other places it might be, like your junk, spam, social, or other
+                folders.
+              </p>
+              <div className="pt-4">
+                <Link href="/auth/login">
+                  <Button className="w-full bg-[#0A1931] hover:bg-[#0A1931]/90">Back to Login</Button>
+                </Link>
+              </div>
+            </div>
+          </AuthCard>
+        )}
+      </div>
+    </>
   )
 }

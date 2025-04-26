@@ -3,26 +3,25 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Eye, EyeOff, Lock, Mail } from "lucide-react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import { Eye, EyeOff, Loader2, Lock, Mail } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { AuthCard } from "@/components/auth/auth-card"
+import { CulturalQuote } from "@/components/auth/cultural-quote"
 import { useToast } from "@/components/ui/use-toast"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 
-// Form validation schema
-const loginSchema = z.object({
+const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
   password: z.string().min(8, { message: "Password must be at least 8 characters" }),
   rememberMe: z.boolean().optional(),
 })
-
-type LoginFormValues = z.infer<typeof loginSchema>
 
 export default function LoginPage() {
   const router = useRouter()
@@ -30,9 +29,8 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
 
-  // Initialize form with react-hook-form
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -40,44 +38,45 @@ export default function LoginPage() {
     },
   })
 
-  // Handle form submission
-  const onSubmit = async (data: LoginFormValues) => {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
 
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-
-      // For demo purposes, we'll just log the user in
-      console.log("Login data:", data)
-
-      toast({
-        title: "Login successful",
-        description: "Welcome back to KimCompass Admin Dashboard",
-      })
-
-      // Redirect to dashboard
-      router.push("/dashboard")
-    } catch (error) {
-      toast({
-        title: "Login failed",
-        description: "Invalid email or password. Please try again.",
-        variant: "destructive",
-      })
-    } finally {
+    // Simulate API call
+    setTimeout(() => {
       setIsLoading(false)
-    }
+
+      // For demo purposes, check for a specific test account
+      if (values.email === "admin@kimcompass.com" && values.password === "password123") {
+        toast({
+          title: "Login successful",
+          description: "Welcome back to KimCompass Admin Dashboard",
+        })
+        router.push("/dashboard")
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Login failed",
+          description: "Invalid email or password. Please try again.",
+        })
+      }
+    }, 1500)
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-[#0A1931]">KimCompass</h1>
-          <p className="mt-2 text-sm text-gray-600">Admin Dashboard</p>
+    <>
+      <div className="absolute top-6 left-6 z-20">
+        <div className="flex items-center gap-2">
+          <div className="h-8 w-8 rounded-full bg-[#0A1931] flex items-center justify-center">
+            <span className="text-white font-bold">K</span>
+          </div>
+          <span className="text-white font-semibold text-xl">KimCompass</span>
         </div>
+      </div>
 
-        <Card>
+      <div className="flex flex-col items-center justify-center min-h-screen p-4">
+        <CulturalQuote />
+
+        <Card className="backdrop-blur-sm bg-white/90 shadow-xl">
           <CardHeader>
             <CardTitle>Sign in</CardTitle>
             <CardDescription>Enter your credentials to access your account</CardDescription>
@@ -181,6 +180,6 @@ export default function LoginPage() {
           </CardFooter>
         </Card>
       </div>
-    </div>
+    </>
   )
 }
