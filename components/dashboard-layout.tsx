@@ -178,6 +178,12 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                           <span>Communities</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
+                      <SidebarMenuItem>
+                        <SidebarMenuButton tooltip="Regions" isActive={isActive("/dashboard/areas")} onClick={() => navigateTo("/dashboard/areas")}>
+                          <MapPin className="h-4 w-4" />
+                          <span>Areas</span>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
                     </SidebarMenu>
                   </SidebarGroupContent>
                 </CollapsibleContent>
@@ -269,6 +275,12 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                       <SidebarMenuItem>
+                        <SidebarMenuButton tooltip="Linkages" isActive={isActive("/dashboard/people/linkages")} onClick={() => navigateTo("/dashboard/people/linkages")}>
+                          <Link className="h-4 w-4" />
+                          <span>Linkages</span>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                      <SidebarMenuItem>
                         <SidebarMenuButton tooltip="Births" isActive={isActive("/dashboard/people/births")} onClick={() => navigateTo("/dashboard/people/births")}>
                           <Baby className="h-4 w-4" />
                           <span>Births</span>
@@ -278,12 +290,6 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                         <SidebarMenuButton tooltip="Deaths" isActive={isActive("/dashboard/people/deaths")} onClick={() => navigateTo("/dashboard/people/deaths")}>
                           <Skull className="h-4 w-4" />
                           <span>Deaths</span>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                      <SidebarMenuItem>
-                        <SidebarMenuButton tooltip="Linkages" isActive={isActive("/dashboard/people/linkages")} onClick={() => navigateTo("/dashboard/people/linkages")}>
-                          <Link className="h-4 w-4" />
-                          <span>Linkages</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     </SidebarMenu>
@@ -317,10 +323,16 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                       <SidebarMenuItem>
                         <SidebarMenuButton tooltip="Create Event" isActive={isActive("/dashboard/events/create")} onClick={() => navigateTo("/dashboard/events/create")}>
                           <PlusCircle className="h-4 w-4" />
-                          <span>Create Event</span>
+                          <span>Create Event / Program</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                       <SidebarMenuItem>
+                        <SidebarMenuButton tooltip="Create Event" isActive={isActive("/dashboard/events/news")} onClick={() => navigateTo("/dashboard/events/news")}>
+                          <PlusCircle className="h-4 w-4" />
+                          <span>Create News</span>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                      {/* <SidebarMenuItem>
                         <SidebarMenuButton tooltip="Approvals" isActive={isActive("/dashboard/events/approvals")} onClick={() => navigateTo("/dashboard/events/approvals")}>
                           <CheckCircle className="h-4 w-4" />
                           <span>Approvals</span>
@@ -331,7 +343,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                           <CreditCard className="h-4 w-4" />
                           <span>Payments</span>
                         </SidebarMenuButton>
-                      </SidebarMenuItem>
+                      </SidebarMenuItem> */}
                     </SidebarMenu>
                   </SidebarGroupContent>
                 </CollapsibleContent>
@@ -347,7 +359,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <SidebarGroup>
                 <SidebarGroupLabel asChild>
                   <CollapsibleTrigger className="w-full flex items-center">
-                  Histories
+                    Histories and Stories
                     <ChevronDown className="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
                   </CollapsibleTrigger>
                 </SidebarGroupLabel>
@@ -357,7 +369,13 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                       <SidebarMenuItem>
                         <SidebarMenuButton tooltip="Histories" isActive={isActive("/dashboard/family-histories")} onClick={() => navigateTo("/dashboard/family-histories")}>
                           <BookOpen className="h-4 w-4" />
-                          <span>Family Stories</span>
+                          <span>View All</span>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                      <SidebarMenuItem>
+                        <SidebarMenuButton tooltip="Histories" isActive={isActive("/dashboard/family-histories/create")} onClick={() => navigateTo("/dashboard/family-histories/create")}>
+                          <BookOpen className="h-4 w-4" />
+                          <span>Create History</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     </SidebarMenu>
